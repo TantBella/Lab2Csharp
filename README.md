@@ -36,7 +36,7 @@ Man ska också kunna välja att se priser i minst 3 olika valutor (två ytterlig
 //Del 2: Skapa en kund klass med properties namn (kan inte ändras), lösen, Kundvagn 
 //(en lista av produkter) CHECK
 
-//Del 3: Skapa en produkt klass med produktnamn, pris perstyck, antal i kundvagn
+//Del 3: Skapa en produkt klass med produktnamn, pris perstyck, antal i kundvagn CHECK
 
 //Del 4: REgistera ny kund ska vara ett menyval, begär användarnan och lösen och 
 //lägg sen användaren i en kundlista, kontorllera att kundnamnet är unikt
