@@ -30,13 +30,33 @@
 
 
 // Produkter som finns att köpa
-List<string> Products = new List<string> { "Korv", "Dricka", "Äpple", "Bröd", "Pasta" };
+Dictionary<string, double> products = new Dictionary<string, double>();
+products["Ett paket mjölk"] = 19.90;
+products["Krossade tomater"] = 16.89;
+products["Prinskorv"] = 46;
+products["1 kg Äpplen"] = 33;
+products["Pågen limpa"] = 28.99;
+
+//foreach (KeyValuePair<string, double> product in products)
+//{
+//    Console.WriteLine(product.Key + ": " + product.Value.ToString());
+//}
+
+
 // En lista med kunder
- List<Customer> Customers = new List<Customer>();
+Dictionary<string, Customer> customers = new Dictionary<string, Customer>()
+    {
+        { "Kund1", new Customer("Knatte", "123") },
+        { "Kund2", new Customer("Fnatte", "321") },
+        { "Kund3", new Customer("Tjatte", "213") }
+};
+
 // En lista för kundens kundvagn
- List<string> CustomerCart = new List<string>();
+List<string> customerCart = new List<string>();
+
 //starta programmet
 Menu();
+
 //Startmenyn
 void Menu()
 {
@@ -64,25 +84,32 @@ void Menu()
     Console.Clear();
     Console.WriteLine("Registrera ny kund");
 
-    Console.Write("Ange användarnamn: ");
-    string username = Console.ReadLine();
+    string username;
+    string password;
 
-    Console.Write("Ange lösenord: ");
-    string password = Console.ReadLine();
-    foreach (var customer in Customers)
+    while (true)
     {
-        if (customer.Name == username)
+        Console.Write("Ange användarnamn: ");
+        username = Console.ReadLine();
+        if (customers.ContainsKey(username))
         {
-            Console.WriteLine("Användarnamnet är upptaget.");
-            Console.ReadKey();
-             Register(); 
+            Console.WriteLine("Användarnamnet är upptaget. Försök igen.");
+        }
+        else
+        {
+            break;
         }
     }
-    Customers.Add(new Customer(username, password));
+
+    Console.Write("Ange lösenord: ");
+    password = Console.ReadLine();
+
+    customers.Add(username, new Customer(username, password));
     Console.WriteLine("Konto skapat. Tryck på valfri knapp för att fortsätta.");
     Console.ReadKey();
     Login();
 }
+
 //Logga in 
 void Login()
 {
@@ -92,8 +119,7 @@ void Login()
     Console.Write("Ange användarnamn: ");
     string username = Console.ReadLine();
 
-    var customer = Customers.FirstOrDefault(c => c.Name == username); 
-    if (customer == null) 
+    if (!customers.ContainsKey(username))
     {
         Console.WriteLine("Kunden finns inte. Vill du registrera en ny kund? (j/n)");
         if (Console.ReadLine().ToLower() == "j")
@@ -104,32 +130,39 @@ void Login()
         {
             Console.WriteLine("Återgår till huvudmenyn. Tryck på valfri knapp.");
             Console.ReadKey();
+            Menu();
         }
-        return; 
+        return;
     }
 
+    var customer = customers[username]; 
+
+    // Ge användaren 3 försök att ange rätt lösenord
     for (int attempts = 0; attempts < 3; attempts++)
     {
         Console.Write("Ange lösenord: ");
         string password = Console.ReadLine();
 
-        if (customer.Password == password) 
+        if (customer.Password == password)
         {
             Console.WriteLine("Inloggning lyckades! Tryck på valfri knapp för att fortsätta.");
             Console.ReadKey();
-            LoggedinMenu();
+            LoggedinMenu(); 
+            return;
         }
         else
         {
             Console.WriteLine("Fel lösenord. Försök igen.");
         }
     }
+
     Console.WriteLine("För många försök. Återgår till huvudmenyn.");
     Console.ReadKey();
-    Menu();
+    Menu(); 
 }
 
-//Andra menyn (när man är inloggas)
+
+//Andra menyn (när man är inloggad)
 void LoggedinMenu()
 {
     //Console.WriteLine("Välkommen " + customer.username);
@@ -158,41 +191,46 @@ void LoggedinMenu()
 
 //Handla metod
 void Shop() {
+    Console.Clear();
     Console.WriteLine("Handla");
     return;
 }
 //Kundvagnsmetod
 void Cart()
 {
+    Console.Clear();
     Console.WriteLine("Kundvagn");
     return;
 }
 //Kassan meotd
 void CheckOut()
 {
+    Console.Clear();
     Console.WriteLine("Gå till kassan");
     return;
 }
 //Kundklass
 public class Customer
 {
-    public string Name { get; private set; } 
+    public string Name { get; private set; }
     public string Password { get; private set; }
     private List<Product> _customerCart;
-    public List<Product> CustomerCart { get { return _customerCart; } } 
+    public List<Product> CustomerCart { get { return _customerCart; } }
 
     public Customer(string username, string password)
     {
-        Name = username; 
-        Password = password; 
-        _customerCart = new List<Product>(); 
-    }
-    public override string ToString()
-    {
-        string cartContents = _customerCart.Count > 0 ? string.Join(", ", _customerCart) : "Kundvagnen är tom";
-        return $"Kund: {Name}\nLösenord: {Password}\nKundvagn: {cartContents}";
+        Name = username;
+        Password = password;
+        _customerCart = new List<Product>();
     }
 }
+
+//public override string ToString()
+//    {
+//        string cartContents = _customerCart.Count > 0 ? string.Join(", ", _customerCart) : "Kundvagnen är tom";
+//        return $"Kund: {Name}\nLösenord: {Password}\nKundvagn: {cartContents}";
+//    }
+//}
 //Produktklass
 public class Product
 {
