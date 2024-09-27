@@ -12,6 +12,7 @@ namespace lab2
             _customers = customers;
         }
 
+        // Registrera ny kund
         public void Register()
         {
             Console.Clear();
@@ -37,11 +38,13 @@ namespace lab2
             Console.Write("Ange lösenord: ");
             password = Console.ReadLine();
 
+            // Skapa och lägg till ny kund
             _customers.Add(username, new Customer(username, password));
             Console.WriteLine("Konto skapat. Tryck på valfri knapp för att fortsätta.");
             Console.ReadKey();
         }
 
+        // Logga in
         public Customer Login()
         {
             Console.Clear();
@@ -61,33 +64,36 @@ namespace lab2
                 {
                     Console.WriteLine("Återgår till huvudmenyn. Tryck på valfri knapp.");
                     Console.ReadKey();
-                    return null;
+                    return null; // Återgår till menyn
                 }
-                return null;
             }
-
-            var customer = _customers[username];
-
-            // Ger användaren 3 försök att ange rätt lösenord
-            for (int attempts = 0; attempts < 3; attempts++)
+            else
             {
-                Console.Write("Ange lösenord: ");
-                string password = Console.ReadLine();
+                var customer = _customers[username];
 
-                if (customer.Password == password)
+                // Ger användaren 3 försök att ange rätt lösenord
+                for (int attempts = 0; attempts < 3; attempts++)
                 {
-                    Console.WriteLine("Inloggning lyckades! Tryck på valfri knapp för att fortsätta.");
-                    Console.ReadKey();
-                    return customer; // Returnera den inloggade kunden
+                    Console.Write("Ange lösenord: ");
+                    string password = Console.ReadLine();
+
+                    if (customer.Password == password)
+                    {
+                        Console.WriteLine("Inloggning lyckades! Tryck på valfri knapp för att fortsätta.");
+                        Console.ReadKey();
+                        return customer; // Returnera den inloggade kunden
+                    }
+                    else
+                    {
+                        Console.WriteLine("Fel lösenord. Försök igen.");
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Fel lösenord. Försök igen.");
-                }
+
+                Console.WriteLine("För många försök. Återgår till huvudmenyn.");
+                return null; // Återgår till menyn
             }
 
-            Console.WriteLine("För många försök. Återgår till huvudmenyn.");
-            return null; // Återgår till menyn
+            return null; // Om inget returneras
         }
     }
 }

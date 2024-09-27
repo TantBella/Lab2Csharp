@@ -17,11 +17,13 @@ namespace lab2
 
     public class CustomerClass
     {
-        public static Dictionary<string, Customer> Customers { get; private set; } = new Dictionary<string, Customer>()
+        public static Dictionary<string, Customer> customers { get; set; } = new Dictionary<string, Customer>();
+        static CustomerClass()
         {
-            { "Kund1", new Customer("Knatte", "123") },
-            { "Kund2", new Customer("Fnatte", "321") },
-            { "Kund3", new Customer("Tjatte", "213") }
-        };
+            customers.Add("Knatte", new Customer("Knatte", "123"));
+            customers.Add("Fnatte", new Customer("Knatte", "321"));
+            customers.Add("Tjatte", new Customer("Knatte", "213"));
+        }
+
     }
 }

@@ -37,7 +37,7 @@ namespace lab2
 
         static void Main(string[] args)
         {
-            accountMethods = new AccountMethods(CustomerClass.Customers); // Använd den statiska kundlistan
+            accountMethods = new AccountMethods(CustomerClass.customers); 
             // Starta programmet
             Menu();
         }
@@ -52,7 +52,7 @@ namespace lab2
             switch (Console.ReadLine())
             {
                 case "1":
-                    accountMethods.Register(); // Anropa Register-metoden
+                    accountMethods.Register(); 
                     Login();
                     break;
                 case "2":
@@ -65,17 +65,17 @@ namespace lab2
             }
         }
 
-        // Logga in 
+
         static void Login()
         {
-            Customer loggedInCustomer = accountMethods.Login(); // Anropa Login-metoden
+            Customer loggedInCustomer = accountMethods.Login(); 
             if (loggedInCustomer != null)
             {
                 LoggedinMenu(loggedInCustomer);
             }
             else
             {
-                Menu(); // Återgå till menyn om inloggningen misslyckades
+                Menu();
             }
         }
 
