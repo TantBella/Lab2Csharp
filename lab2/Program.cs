@@ -16,7 +16,7 @@
 //kundvagn, gå till kassan CHECK
 
 //Del 7: Handla, visa minst 3 produkter, låt användaren välja proukter, gör en
-//metod som lägger till produkter ochupdaterar antal om samma produkt redan finns
+//metod som lägger till produkter i kundvagnen ochupdaterar antal om samma produkt redan finns
 
 //DEl 8: Visa kundvagn. Skapa en funktion som visar alla produkter i kundvagen,
 //styckpris, antal, totalpris, total kostand för allt
@@ -34,10 +34,12 @@ namespace lab2
     class Program
     {
         static AccountMethods accountMethods;
+        static ShoppingMethods shoppingMethods;
 
         static void Main(string[] args)
         {
-            accountMethods = new AccountMethods(CustomerClass.customers); 
+            accountMethods = new AccountMethods(CustomerClass.customers);
+            shoppingMethods = new ShoppingMethods();
             // Starta programmet
             Menu();
         }
@@ -64,8 +66,7 @@ namespace lab2
                     break;
             }
         }
-
-
+        //Kollar så man är inloggad innan man kommer till andra menyn
         static void Login()
         {
             Customer loggedInCustomer = accountMethods.Login(); 
@@ -90,46 +91,19 @@ namespace lab2
             switch (Console.ReadLine())
             {
                 case "1":
-                    Shop();
+                    shoppingMethods.Shop(customer);
                     break;
                 case "2":
-                    Cart(customer);
+                    shoppingMethods.Cart(customer);
                     break;
                 case "3":
-                    CheckOut(customer);
+                    shoppingMethods.CheckOut(customer);
                     break;
                 default:
                     Console.WriteLine("Ogiltigt val. Försök igen.");
                     LoggedinMenu(customer);
                     break;
             }
-        }
-
-        // Handla metod
-        static void Shop()
-        {
-            Console.Clear();
-            Console.WriteLine("Handla");
-            // Logik för att handla
-            Console.ReadKey();
-        }
-
-        // Kundvagnsmetod
-        static void Cart(Customer customer)
-        {
-            Console.Clear();
-            Console.WriteLine("Kundvagn");
-            // Logik för att visa kundvagn
-            Console.ReadKey();
-        }
-
-        // Kassan metod
-        static void CheckOut(Customer customer)
-        {
-            Console.Clear();
-            Console.WriteLine("Gå till kassan");
-            // Logik för kassan
-            Console.ReadKey();
-        }
+        }    
     }
 }

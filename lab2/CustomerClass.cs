@@ -5,15 +5,23 @@ namespace lab2
 {
     public class Customer
     {
-        public string Name { get; private set; }
-        public string Password { get; private set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
 
-        public Customer(string username, string password)
+        public Customer(string name, string password)
         {
-            Name = username;
+            Name = name;
             Password = password;
+            ShoppingCart = new ShoppingCart();
+        }
+
+        public override string ToString()
+        {
+            return $"Kund: {Name}, Antal produkter i kundvagn: {ShoppingCart.ProductsInCart.Count}";
         }
     }
+
 
     public class CustomerClass
     {
