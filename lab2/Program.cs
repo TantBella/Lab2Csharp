@@ -15,8 +15,10 @@
 //Del 6: När man loggat in så ska en ny meny visas med följande val: handla, visa
 //kundvagn, gå till kassan CHECK
 
-//Del 7: Handla, visa minst 3 produkter, låt användaren välja proukter, gör en
-//metod som lägger till produkter i kundvagnen ochupdaterar antal om samma produkt redan finns
+//Del 7: Handla, visa minst 3 produkter,CHECK
+//7a:låt användaren välja proukter,
+//7b: gör en metod som lägger till produkter i kundvagnen
+//7c: ochupdaterar antal om samma produkt redan finns
 
 //DEl 8: Visa kundvagn. Skapa en funktion som visar alla produkter i kundvagen,
 //styckpris, antal, totalpris, total kostand för allt
@@ -54,7 +56,7 @@ namespace lab2
             switch (Console.ReadLine())
             {
                 case "1":
-                    accountMethods.Register(); 
+                    accountMethods.Register();
                     Login();
                     break;
                 case "2":
@@ -66,44 +68,19 @@ namespace lab2
                     break;
             }
         }
-        //Kollar så man är inloggad innan man kommer till andra menyn
+
+        // Kollar så man är inloggad innan man kommer till nästa meny
         static void Login()
         {
-            Customer loggedInCustomer = accountMethods.Login(); 
+            Customer loggedInCustomer = accountMethods.Login();
             if (loggedInCustomer != null)
             {
-                LoggedinMenu(loggedInCustomer);
+                shoppingMethods.LoggedinMenu(loggedInCustomer); 
             }
             else
             {
                 Menu();
             }
         }
-
-        // Andra menyn (när man är inloggad)
-        static void LoggedinMenu(Customer customer)
-        {
-            Console.WriteLine("Välj ett av följande menyval:");
-            Console.WriteLine("1. Handla");
-            Console.WriteLine("2. Se kundvagn");
-            Console.WriteLine("3. Gå till kassan");
-
-            switch (Console.ReadLine())
-            {
-                case "1":
-                    shoppingMethods.Shop(customer);
-                    break;
-                case "2":
-                    shoppingMethods.Cart(customer);
-                    break;
-                case "3":
-                    shoppingMethods.CheckOut(customer);
-                    break;
-                default:
-                    Console.WriteLine("Ogiltigt val. Försök igen.");
-                    LoggedinMenu(customer);
-                    break;
-            }
-        }    
     }
 }

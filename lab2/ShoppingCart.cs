@@ -29,7 +29,7 @@ namespace lab2
             {
                 existingProduct.Quantity += quantity;
             }
-            Console.WriteLine($"{quantity} {product.Name} har lagts till i kundvagnen.");
+            Console.WriteLine($"{quantity} stycken {product.Name} har lagts till i kundvagnen.");
         }
         public void ShowCart()
         {

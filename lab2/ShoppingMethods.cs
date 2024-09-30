@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace lab2
+﻿namespace lab2
 {
     internal class ShoppingMethods
     {
@@ -26,13 +23,14 @@ namespace lab2
                     Console.WriteLine("Ange antal:");
                     int quantity = int.Parse(Console.ReadLine());
                     customer.ShoppingCart.AddToCart(products[choice - 1], quantity);
+                    LoggedinMenu(customer);
                 }
                 else
                 {
                     Console.WriteLine("Ogiltigt val. Försök igen.");
                 }
             }
-            Console.WriteLine("Tillbaka till menyn.");
+            LoggedinMenu(customer); 
         }
 
         public void Cart(Customer customer)
@@ -41,6 +39,7 @@ namespace lab2
             Console.WriteLine("Din kundvagn:");
             customer.ShoppingCart.ShowCart();
             Console.ReadKey();
+            LoggedinMenu(customer); 
         }
 
         public void CheckOut(Customer customer)
@@ -52,6 +51,32 @@ namespace lab2
 
             customer.ShoppingCart.ClearCart(); // Tömmer kundvagnen efter betalning
             Console.ReadKey();
+            LoggedinMenu(customer); 
+        }
+
+        public void LoggedinMenu(Customer customer)
+        {
+            Console.WriteLine("Vad vill du göra? ");
+            Console.WriteLine("1. Handla");
+            Console.WriteLine("2. Se kundvagn");
+            Console.WriteLine("3. Gå till kassan");
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Shop(customer);
+                    break;
+                case "2":
+                    Cart(customer);
+                    break;
+                case "3":
+                    CheckOut(customer);
+                    break;
+                default:
+                    Console.WriteLine("Ogiltigt val. Försök igen.");
+                    LoggedinMenu(customer);
+                    break;
+            }
         }
     }
 }
