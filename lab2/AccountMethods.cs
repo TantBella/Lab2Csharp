@@ -1,5 +1,10 @@
-﻿using System;
+﻿//fixa så inte programmet kraschar när man försöker logga ut. Möjligen behöv logga ut läggas i shoppingmethods
+//Fråga david om hjälp, varför den kraschar vid utloggning
+//Om man ändrar valutan efter man lagt nåt i kundvagnen hur justeras priset då
+using System;
 using System.Collections.Generic;
+using lab2.Customers;
+using lab2.Shopping;
 
 namespace lab2
 {
@@ -79,11 +84,12 @@ namespace lab2
                         Customer.LoggedIn = true;
                         Customer.ActiveCustomer = customer;
                         Console.Clear();
-                        if (customer.Member is "Gold" or "Silver" or "Bronze")
+                        if (customer.Member is "Guld" or "Silver" or "Brons")
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Välkommen: " + customer.Name + "\nDittt medlemsskap är: " + customer.Member);
+                            Console.BackgroundColor = ConsoleColor.DarkBlue;
                             Console.ForegroundColor = ConsoleColor.Gray;
+                            Console.WriteLine("Välkommen: " + customer.Name + "\nDu är på medlemsskapsnivån: " + customer.Member);
+                            Console.ResetColor();
                         }
                         else
                         {
@@ -100,27 +106,7 @@ namespace lab2
                 Console.WriteLine("För många försök. Återgår till huvudmenyn.");
                 return null;
             }
-
-            return null;
-        }
-
-        public void LogOut(Customer customer)
-        {
-            Console.Clear();
-            Console.WriteLine("Vill du logga ut? (j/n)");
-            if (Console.ReadLine().ToLower() == "j")
-            {
-                //Customer.ActiveCustomer.Clear();
-                Customer.LoggedIn = false;
-                Customer.ActiveCustomer = null;
-                Console.Clear();
-                Program.Menu();
-            }
-            else
-            {
-                Console.Clear();
-                _shoppingMethods.LoggedinMenu(customer);
-            }
+ return null;
         }
     }
 }

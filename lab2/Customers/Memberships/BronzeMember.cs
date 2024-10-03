@@ -1,10 +1,12 @@
-﻿using System;
+﻿//Brons: 5 % rabatt på hela köpet
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab2
+namespace lab2.Customers.Memberships
 {
     public class BronzeMember : Customer
     {
@@ -13,9 +15,3 @@ namespace lab2
         public BronzeMember(string name, string password) : base(name, password) { }
     }
 }
-
-
-//Guld: 15 % rabatt på hela köpet
-//Silver: 10 % rabatt på hela köpet
-//Brons: 5 % rabatt på hela köpet
-//Nivåerna skall implementeras med hjälp av arv av basklassen Kund

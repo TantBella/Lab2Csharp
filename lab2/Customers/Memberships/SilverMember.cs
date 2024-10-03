@@ -1,10 +1,12 @@
-﻿using System;
+﻿//Silver: 10 % rabatt på hela köpet
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab2
+namespace lab2.Customers.Memberships
 {
     public class SilverMember : Customer
     {

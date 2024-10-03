@@ -1,12 +1,14 @@
 ﻿//Visa produkterna i konsolen.
-//Låt användaren välja vilka produkter de vill köpa genom att ange ett nummer eller produkt-ID.
+//Låt användaren välja vilka produkter de vill
+//köpa genom att ange ett nummer.
 //Uppdatera kundvagnen med de valda produkterna.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using lab2.Customers;
 
-namespace lab2
+namespace lab2.Shopping
 {
     public class ShoppingCart
     {
@@ -43,7 +45,7 @@ namespace lab2
                 Console.WriteLine("Din kundvagn är tom.");
             }
             else
-            {                
+            {
                 // För att hålla reda på den sammanlagda kostnaden
                 double totalCost = 0;
 
@@ -61,7 +63,7 @@ namespace lab2
 
                 Console.WriteLine("--------------------------------------------------");
                 Console.WriteLine($"{"Sammanlagd kostnad:",-20} {totalCost}");
-                
+
             }
         }
 

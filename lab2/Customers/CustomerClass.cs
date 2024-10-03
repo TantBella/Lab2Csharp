@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using lab2.Shopping;
+using lab2.Customers.Memberships;
 
-namespace lab2
+namespace lab2.Customers
 {
     public class Customer
     {
@@ -23,11 +25,11 @@ namespace lab2
         public override string ToString()
         {
             var output = string.Empty;
-            output += ("Kund: " + Name + "\n");
-            output += ("Lösenord: " + Password + "\n");
-            output += ("Medlemsskap: " + Member + "\n");
-            output += ("Medlemsrabatt: " + Discount + "%\n");
-          
+            output += "Kund: " + Name + "\n";
+            output += "Lösenord: " + Password + "\n";
+            output += "Medlemsskap: " + Member + "\n";
+            output += "Medlemsrabatt: " + Discount + "%\n";
+
             return output;
         }
     }

@@ -1,11 +1,13 @@
 ﻿//Del 12: VG uppgifterna:
-//Medlemssystem med rabatt
+//Medlemssystem med rabatt-CHECK
 // Valuta kurser
 //Spara nya kunder
 //Kolla så inga fel finns
 //Städa upp koden så den blir CLEAN/DRY
 //Frivilligt om tid funns: styling med färg 
 using System;
+using lab2.Customers;
+using lab2.Shopping;
 
 namespace lab2
 {
@@ -29,9 +31,7 @@ namespace lab2
         public static void Menu()
         {
             Console.Clear();
-            Console.WriteLine("1. Registrera ny kund");
-            Console.WriteLine("2. Logga in");
-            Console.WriteLine("3. Avsluta");
+            Console.WriteLine("1. Registrera ny kund \n2. Logga in \n3. Avsluta");
 
             switch (Console.ReadLine())
             {
