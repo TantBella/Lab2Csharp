@@ -56,7 +56,7 @@ namespace lab2
                 }
 
                 Console.WriteLine("--------------------------------------------------");
-                Console.WriteLine($"{"Sammanlagd kostnad:",-20} {totalCost,-10}");
+                Console.WriteLine($"{"Sammanlagd kostnad:",-20} {totalCost}");
             }
         }
 

@@ -56,65 +56,19 @@ namespace lab2
         public void CheckOut(Customer customer)
         {
             Console.Clear();
-            Console.WriteLine("Du vill köpa:");
-
-            // Hämta produkterna från kundvagnen
-            List<CartItem> productsInCart = customer.ShoppingCart.GetItems();
-
-            // Kontrollera om kundvagnen är tom
-            if (productsInCart.Count == 0)
+            Console.WriteLine("Kundvagnen: ");
+            foreach (var product in customer.ShoppingCart.ProductsInCart)
             {
-                Console.WriteLine("Din kundvagn är tom.");
-                Console.ReadKey();
-                LoggedinMenu(customer);
-                return;
+                Console.WriteLine($"{product.Quantity,-5} stycken {product.Name}");
             }
-
-            // Visa produkterna i kundvagnen
-            foreach (var product in productsInCart)
-            {
-                Console.WriteLine($"{product.Quantity,-5} stycken {product.Product.Name}");
-            }
-
-            Console.WriteLine("--------------------------------------------------");
-
-            // Beräkna och visa total kostnad
-            int totalCost = customer.ShoppingCart.GetTotalCost();
-            Console.WriteLine($"{"Sammanlagd kostnad:",-20} {totalCost} kr");
-
-            // Uppmana användaren att betala
-            Console.WriteLine($"Total kostnad: {totalCost} kr\nTryck på valfri tangent för att betala.");
+                 int totalCost = customer.ShoppingCart.GetTotalCost();
+            Console.WriteLine($"Total kostnad: {totalCost} kr\n--------------------------------------------------\nTryck på valfri tangent för att betala.");
             Console.ReadKey();
-
-            // Töm kundvagnen efter betalning
             customer.ShoppingCart.ClearCart();
-            Console.WriteLine("Tack för ditt köp! Välkommen åter.");
+            Console.WriteLine("Tack för ditt köp! Välkommen åter.\n");
             Console.ReadKey();
             LoggedinMenu(customer);
         }
-
-        //public void CheckOut(Customer customer)
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Du vill köpa:");
-
-        //    foreach (var product in ProductsInCart)
-        //    {
-
-        //        Console.WriteLine($"{product.Quantity,-5} stycken {product.Name,-20}");
-        //    }
-
-        //    Console.WriteLine("--------------------------------------------------");
-        //    Console.WriteLine($"{"Sammanlagd kostnad:",-20} {totalCost,-10}");
-        //}
-        //int totalCost = customer.ShoppingCart.GetTotalCost();
-        //    Console.WriteLine($"Total kostnad: {totalCost} kr\nTryck på valfri tangent för att betala.");
-        //    Console.ReadKey();
-        //    customer.ShoppingCart.ClearCart();
-        //    Console.WriteLine("Tack för ditt köp! Välkommen åter.");
-        //    Console.ReadKey();
-        //    LoggedinMenu(customer);
-        //}
 
         public void LoggedinMenu(Customer customer)
         {
