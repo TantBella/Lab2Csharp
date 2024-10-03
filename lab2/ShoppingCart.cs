@@ -31,6 +31,7 @@ namespace lab2
             }
             Console.WriteLine($"{quantity} stycken {product.Name} har lagts till i kundvagnen.");
         }
+
         public void ShowCart()
         {
             if (ProductsInCart.Count == 0)
@@ -39,14 +40,27 @@ namespace lab2
             }
             else
             {
+                // För att hålla reda på den sammanlagda kostnaden
+                int totalCost = 0;
+
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine($"{"Produktnamn",-20} {"Styckpris",-10} {"Antal",-5} {"Totalpris",-10}");
+                Console.WriteLine("--------------------------------------------------");
+
                 foreach (var product in ProductsInCart)
                 {
-                    Console.WriteLine(product.ToString());
+                    int productTotalPrice = product.PricePerUnit * product.Quantity;
+                    totalCost += productTotalPrice;
+
+                    Console.WriteLine($"{product.Name,-20} {product.PricePerUnit,-10} {product.Quantity,-5} {productTotalPrice,-10}");
                 }
+
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine($"{"Sammanlagd kostnad:",-20} {totalCost,-10}");
             }
         }
 
-        public decimal GetTotalCost()
+        public int GetTotalCost()
         {
             return ProductsInCart.Sum(p => p.PricePerUnit * p.Quantity);
         }

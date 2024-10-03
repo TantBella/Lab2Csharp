@@ -29,9 +29,10 @@ namespace lab2
         static CustomerClass()
         {
             customers.Add("Knatte", new Customer("Knatte", "123"));
-            customers.Add("Fnatte", new Customer("Knatte", "321"));
-            customers.Add("Tjatte", new Customer("Knatte", "213"));
+            customers.Add("Fnatte", new Customer("Fnatte", "321"));
+            customers.Add("Tjatte", new Customer("Tjatte", "213"));
         }
 
     }
+
 }

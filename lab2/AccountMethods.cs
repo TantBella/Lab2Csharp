@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace lab2
 {
-    internal class AccountMethods
+    public class AccountMethods
     {
         private Dictionary<string, Customer> _customers;
 
@@ -12,7 +12,6 @@ namespace lab2
             _customers = customers;
         }
 
-        // Registrera ny kund
         public void Register()
         {
             Console.Clear();
@@ -38,13 +37,11 @@ namespace lab2
             Console.Write("Ange lösenord: ");
             password = Console.ReadLine();
 
-            // Skapa och lägg till ny kund
             _customers.Add(username, new Customer(username, password));
             Console.WriteLine("Konto skapat. Tryck på valfri knapp för att fortsätta.");
             Console.ReadKey();
         }
 
-        // Logga in
         public Customer Login()
         {
             Console.Clear();
@@ -64,14 +61,13 @@ namespace lab2
                 {
                     Console.WriteLine("Återgår till huvudmenyn. Tryck på valfri knapp.");
                     Console.ReadKey();
-                    return null; // Återgår till menyn
+                    return null;
                 }
             }
             else
             {
                 var customer = _customers[username];
 
-                // Ger användaren 3 försök att ange rätt lösenord
                 for (int attempts = 0; attempts < 3; attempts++)
                 {
                     Console.Write("Ange lösenord: ");
@@ -81,7 +77,7 @@ namespace lab2
                     {
                         Console.WriteLine("Inloggning lyckades! Tryck på valfri knapp för att fortsätta.");
                         Console.ReadKey();
-                        return customer; // Returnera den inloggade kunden
+                        return customer;
                     }
                     else
                     {
@@ -90,10 +86,30 @@ namespace lab2
                 }
 
                 Console.WriteLine("För många försök. Återgår till huvudmenyn.");
-                return null; // Återgår till menyn
+                return null;
             }
 
-            return null; // Om inget returneras
+            return null;
+        }
+
+        public void LogOut(Customer customer)
+        {
+            Console.Clear();
+            Console.WriteLine("Vill du logga ut? (j/n)");
+            if (Console.ReadLine().ToLower() == "j")
+            {
+                Console.WriteLine("Du är utloggad. Välkommen åter!");
+                Console.WriteLine("Tryck på valfri tangent för att återgå till huvudmenyn.");
+                Console.ReadKey();
+                Program.Menu();
+            }
+            else
+            {
+                Console.WriteLine("Återgår till föregående meny.");
+                Console.ReadKey();
+                ShoppingMethods shoppingMethods = new ShoppingMethods(this); 
+                shoppingMethods.LoggedinMenu(customer); 
+            }
         }
     }
 }
