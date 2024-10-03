@@ -6,16 +6,18 @@ namespace lab2
     public class AccountMethods
     {
         private Dictionary<string, Customer> _customers;
+        private ShoppingMethods _shoppingMethods;
 
-        public AccountMethods(Dictionary<string, Customer> customers)
+        public AccountMethods(ShoppingMethods shoppingMethods, Dictionary<string, Customer> customers)
         {
             _customers = customers;
+            _shoppingMethods = shoppingMethods;
         }
 
         public void Register()
         {
             Console.Clear();
-            Console.WriteLine("Registrera ny kund");
+            Console.WriteLine("Registrera nytt konto");
 
             string username;
             string password;
@@ -72,11 +74,22 @@ namespace lab2
                 {
                     Console.Write("Ange lösenord: ");
                     string password = Console.ReadLine();
-
                     if (customer.Password == password)
                     {
-                        Console.WriteLine("Inloggning lyckades! Tryck på valfri knapp för att fortsätta.");
-                        Console.ReadKey();
+                        Customer.LoggedIn = true;
+                        Customer.ActiveCustomer = customer;
+                        Console.Clear();
+                        if (customer.Member is "Gold" or "Silver" or "Bronze")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Välkommen: " + customer.Name + "\nDittt medlemsskap är: " + customer.Member);
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Välkommen {customer.Name}!");
+                            _shoppingMethods.LoggedinMenu(customer);                        
+                        }
                         return customer;
                     }
                     else
@@ -84,7 +97,6 @@ namespace lab2
                         Console.WriteLine("Fel lösenord. Försök igen.");
                     }
                 }
-
                 Console.WriteLine("För många försök. Återgår till huvudmenyn.");
                 return null;
             }
@@ -98,17 +110,16 @@ namespace lab2
             Console.WriteLine("Vill du logga ut? (j/n)");
             if (Console.ReadLine().ToLower() == "j")
             {
-                Console.WriteLine("Du är utloggad. Välkommen åter!");
-                Console.WriteLine("Tryck på valfri tangent för att återgå till huvudmenyn.");
-                Console.ReadKey();
+                //Customer.ActiveCustomer.Clear();
+                Customer.LoggedIn = false;
+                Customer.ActiveCustomer = null;
+                Console.Clear();
                 Program.Menu();
             }
             else
             {
-                Console.WriteLine("Återgår till föregående meny.");
-                Console.ReadKey();
-                ShoppingMethods shoppingMethods = new ShoppingMethods(this); 
-                shoppingMethods.LoggedinMenu(customer); 
+                Console.Clear();
+                _shoppingMethods.LoggedinMenu(customer);
             }
         }
     }

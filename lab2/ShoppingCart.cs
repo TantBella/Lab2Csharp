@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Visa produkterna i konsolen.
+//Låt användaren välja vilka produkter de vill köpa genom att ange ett nummer eller produkt-ID.
+//Uppdatera kundvagnen med de valda produkterna.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,12 +40,12 @@ namespace lab2
         {
             if (ProductsInCart.Count == 0)
             {
-                Console.WriteLine("Kundvagnen är tom.");
+                Console.WriteLine("Din kundvagn är tom.");
             }
             else
-            {
+            {                
                 // För att hålla reda på den sammanlagda kostnaden
-                int totalCost = 0;
+                double totalCost = 0;
 
                 Console.WriteLine("--------------------------------------------------");
                 Console.WriteLine($"{"Produktnamn",-20} {"Styckpris",-10} {"Antal",-5} {"Totalpris",-10}");
@@ -49,7 +53,7 @@ namespace lab2
 
                 foreach (var product in ProductsInCart)
                 {
-                    int productTotalPrice = product.PricePerUnit * product.Quantity;
+                    double productTotalPrice = product.PricePerUnit * product.Quantity;
                     totalCost += productTotalPrice;
 
                     Console.WriteLine($"{product.Name,-20} {product.PricePerUnit,-10} {product.Quantity,-5} {productTotalPrice,-10}");
@@ -57,13 +61,21 @@ namespace lab2
 
                 Console.WriteLine("--------------------------------------------------");
                 Console.WriteLine($"{"Sammanlagd kostnad:",-20} {totalCost}");
+                
             }
         }
 
-        public int GetTotalCost()
+        public double GetTotalCost()
         {
-            return ProductsInCart.Sum(p => p.PricePerUnit * p.Quantity);
+            double totalCost = ProductsInCart.Sum(p => p.PricePerUnit * p.Quantity);
+            if (Customer.ActiveCustomer != null)
+            {
+                double discountAmount = totalCost * (Customer.ActiveCustomer.Discount / 100);
+                totalCost -= discountAmount;
+            }
+            return totalCost;
         }
+
 
         public void ClearCart()
         {

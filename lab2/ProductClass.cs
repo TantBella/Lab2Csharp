@@ -1,7 +1,5 @@
 ﻿//Skapa en lista med produkter.
-//Visa produkterna i konsolen.
-//Låt användaren välja vilka produkter de vill köpa genom att ange ett nummer eller produkt-ID.
-//Uppdatera kundvagnen med de valda produkterna.
+
 
 using System;
 using System.Collections.Generic;
