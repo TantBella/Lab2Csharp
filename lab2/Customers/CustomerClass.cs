@@ -8,11 +8,13 @@ namespace lab2.Customers
     public class Customer
     {
         public static bool LoggedIn { get; set; }
-        public static Customer ActiveCustomer { get; set; }
+        //Active customer ska kunna vara null
+        public static Customer? ActiveCustomer { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
-        public virtual string Member { get; set; }
+        //Ingen medlemsnivå som standard
+        public virtual string Member { get; set; } = "Ej medlem";
         public virtual double Discount { get; set; }
 
         public Customer(string name, string password)
@@ -32,18 +34,43 @@ namespace lab2.Customers
 
             return output;
         }
+   
+
+    public static void SaveNewCustomer(Customer customer, string CustomerList)
+    {
+        string customerData = $"{customer.Name};{customer.Password}";
+        File.AppendAllText(CustomerList, customerData + Environment.NewLine);
+    }
+
+    public static Dictionary<string, Customer> FetchNewCustomer(string CustomerList)
+    {
+        var customerList = new Dictionary<string, Customer>();
+
+        if (File.Exists(CustomerList))
+        {
+            var lines = File.ReadAllLines(CustomerList);
+
+            foreach (var line in lines)
+            {
+                var data = line.Split(';');
+                if (data.Length == 2)
+                {
+                    var customer = new Customer(data[0], data[1]);
+                    customerList.Add(data[0], customer);
+                }
+            }
+        }
+        return customerList;
+    }
     }
 
     public class CustomerClass
     {
-        public static Dictionary<string, Customer> customers { get; set; } = new Dictionary<string, Customer>();
-        static CustomerClass()
+        public static Dictionary<string, Customer> Customers { get; set; } = new Dictionary<string, Customer>
         {
-            customers.Add("Knatte", new BronzeMember("Knatte", "123"));
-            customers.Add("Fnatte", new SilverMember("Fnatte", "321"));
-            customers.Add("Tjatte", new GoldMember("Tjatte", "213"));
-        }
-
+            { "Knatte", new BronzeMember("Knatte", "123") },
+            { "Fnatte", new SilverMember("Fnatte", "321") },
+            { "Tjatte", new GoldMember("Tjatte", "213") }
+        };
     }
-
 }

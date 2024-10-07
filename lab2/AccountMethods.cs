@@ -1,6 +1,10 @@
 ﻿//fixa så inte programmet kraschar när man försöker logga ut. Möjligen behöv logga ut läggas i shoppingmethods
 //Fråga david om hjälp, varför den kraschar vid utloggning
 //Om man ändrar valutan efter man lagt nåt i kundvagnen hur justeras priset då
+//behöver jag ha quantity redan när jag deklararer producten i listna?
+//det står inget i customerlist fast  användaren är registrerad
+//ska bara de förprogrammerade ha medlemsnivå eller nya användare också?
+
 using System;
 using System.Collections.Generic;
 using lab2.Customers;
@@ -10,14 +14,21 @@ namespace lab2
 {
     public class AccountMethods
     {
-        private Dictionary<string, Customer> _customers;
-        private ShoppingMethods _shoppingMethods;
+        private readonly Dictionary<string, Customer> _customers;
+        private readonly ShoppingMethods _shoppingMethods;
 
         public AccountMethods(ShoppingMethods shoppingMethods, Dictionary<string, Customer> customers)
         {
             _customers = customers;
             _shoppingMethods = shoppingMethods;
+
+            var registeredCustomers = Customer.FetchNewCustomer("CustomerList.txt");
+            foreach (var customer in registeredCustomers)
+            {
+                _customers.Add(customer.Key, customer.Value);
+            }
         }
+    
 
         public void Register()
         {
@@ -44,7 +55,10 @@ namespace lab2
             Console.Write("Ange lösenord: ");
             password = Console.ReadLine();
 
-            _customers.Add(username, new Customer(username, password));
+            var newCustomer = new Customer(username, password);
+            _customers.Add(username, newCustomer);
+            Customer.SaveNewCustomer(newCustomer, "CustomerList.txt");
+
             Console.WriteLine("Konto skapat. Tryck på valfri knapp för att fortsätta.");
             Console.ReadKey();
         }
@@ -59,7 +73,7 @@ namespace lab2
 
             if (!_customers.ContainsKey(username))
             {
-                Console.WriteLine("Kunden finns inte. Vill du registrera en ny kund? (j/n)");
+                Console.WriteLine("Användarnamnet finns inte. Vill du registrera en ny kund? (j/n)");
                 if (Console.ReadLine().ToLower() == "j")
                 {
                     Register();
@@ -100,13 +114,13 @@ namespace lab2
                     }
                     else
                     {
-                        Console.WriteLine("Fel lösenord. Försök igen.");
+                        Console.WriteLine($"Lösenordet för {customer.Name} stämmer inte.. Försök igen.");
                     }
                 }
-                Console.WriteLine("För många försök. Återgår till huvudmenyn.");
+                Console.WriteLine("För många lösenords försök. Återgår till huvudmenyn.");
                 return null;
             }
- return null;
+        return null;
         }
     }
 }
