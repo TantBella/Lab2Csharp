@@ -58,8 +58,11 @@ handla.
 
 Log in ska fungera för minst 3 fördefinierade kunder.
 Kund1: Namn="Knatte", Password="123"
+
 Kund2: Namn="Fnatte", Password="321"
+
 Kund3: Namn="Tjatte", Password="213"
+
 Det skall gå att logga ut och in men inget krav på att skapade kunder skall finnas kvar emellan
 körningar.
 
