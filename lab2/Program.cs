@@ -21,7 +21,7 @@ namespace lab2
             List<Product> products = ProductList.Products;
 
             shoppingMethods = new ShoppingMethods(null, products);
-            accountMethods = new AccountMethods(shoppingMethods, CustomerClass.customers);
+            accountMethods = new AccountMethods(shoppingMethods, CustomerClass.Customers);
 
             shoppingMethods = new ShoppingMethods(accountMethods, products);
 
