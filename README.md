@@ -65,6 +65,7 @@ Det skall gå att skapa ny kund, lägga till föremål i kundvagnen, titta i sin
 handla.
 
 Log in ska fungera för minst 3 fördefinierade kunder.
+
 Kund1: Namn="Knatte", Password="123"
 
 Kund2: Namn="Fnatte", Password="321"
