@@ -1,12 +1,6 @@
-﻿//fixa så inte programmet kraschar när man försöker logga ut. Möjligen behöv logga ut läggas i shoppingmethods
-//Fråga david om hjälp, varför den kraschar vid utloggning
-//Om man ändrar valutan efter man lagt nåt i kundvagnen hur justeras priset då
-//behöver jag ha quantity redan när jag deklararer producten i listna?
-//det står inget i customerlist fast  användaren är registrerad
-//ska bara de förprogrammerade ha medlemsnivå eller nya användare också?
+﻿//Registrera ny kund
+//Logga in med existerande konto
 
-using System;
-using System.Collections.Generic;
 using lab2.Customers;
 using lab2.Shopping;
 
@@ -14,6 +8,8 @@ namespace lab2
 {
     public class AccountMethods
     {
+        private readonly string userFile = @"C:\Users\User\OneDrive\Skrivbord\ITHS 24-26\C#\lab2\Lab2Csharp\lab2\CustomerList.txt";
+        private readonly string filePath;
         private readonly Dictionary<string, Customer> _customers;
         private readonly ShoppingMethods _shoppingMethods;
 
@@ -22,14 +18,15 @@ namespace lab2
             _customers = customers;
             _shoppingMethods = shoppingMethods;
 
-            var registeredCustomers = Customer.FetchNewCustomer("CustomerList.txt");
+            filePath = Path.Combine(Environment.CurrentDirectory, userFile);
+            var registeredCustomers = Customer.FetchNewCustomer(filePath);
+
             foreach (var customer in registeredCustomers)
             {
                 _customers.Add(customer.Key, customer.Value);
             }
         }
     
-
         public void Register()
         {
             Console.Clear();
@@ -57,7 +54,7 @@ namespace lab2
 
             var newCustomer = new Customer(username, password);
             _customers.Add(username, newCustomer);
-            Customer.SaveNewCustomer(newCustomer, "CustomerList.txt");
+            Customer.SaveNewCustomer(newCustomer, filePath);
 
             Console.WriteLine("Konto skapat. Tryck på valfri knapp för att fortsätta.");
             Console.ReadKey();

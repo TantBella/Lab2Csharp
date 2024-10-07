@@ -1,4 +1,5 @@
 ﻿//Skapa en lista med produkter.
+//Justera priset efter vald valuta
 
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,10 @@ namespace lab2.Shopping
     {
         public static readonly List<Product> Products = new()
         {
-            new() { Name = "Laptop", SekPricePerUnit = 12000, PricePerUnit = 12000, Quantity = 0 },
-            new() { Name = "Skärm", SekPricePerUnit = 5000, PricePerUnit = 5000, Quantity = 0 },
-            new() { Name = "Datormus", SekPricePerUnit = 399, PricePerUnit = 399, Quantity = 0 },
-            new() { Name = "Tangentbord", SekPricePerUnit = 650, PricePerUnit = 650, Quantity = 0 }
+            new() { Name = "Laptop", SekPricePerUnit = 12000, PricePerUnit = 12000 },
+            new() { Name = "Skärm", SekPricePerUnit = 5000, PricePerUnit = 5000 },
+            new() { Name = "Datormus", SekPricePerUnit = 399, PricePerUnit = 399},
+            new() { Name = "Tangentbord", SekPricePerUnit = 650, PricePerUnit = 650 }
 
         };
         public static void UpdatePrices(double exchangeRate)

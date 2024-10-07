@@ -1,5 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//Visa och välj produkter
+//Visa kundvagn
+//Ändra valuta
+//Köp produkterna i kundvagnen
+//Logga ut
+//Visa meny som kommer upp när man har loggat in
+
 using lab2.Customers;
 
 namespace lab2.Shopping
@@ -51,14 +56,17 @@ namespace lab2.Shopping
             }
         }
 
+
         public void Cart(Customer customer)
         {
             Console.Clear();
             Console.WriteLine("Din kundvagn:");
-            customer.ShoppingCart.ShowCart();
+            double totalCost = customer.ShoppingCart.GetTotalCost(currentCurrency, exchangeRate);
+            customer.ShoppingCart.ShowCart(exchangeRate);
             Console.ReadKey();
             LoggedinMenu(customer);
         }
+
 
         public void ChangeCurrency()
         {
@@ -94,6 +102,7 @@ namespace lab2.Shopping
             LoggedinMenu(Customer.ActiveCustomer);
         }
 
+
         public void CheckOut(Customer customer)
         {
             Console.Clear();
@@ -104,7 +113,7 @@ namespace lab2.Shopping
                 Console.WriteLine($"{product.Quantity,-5} stycken {product.Name}");
             }
 
-            double totalCost = customer.ShoppingCart.GetTotalCost();
+            double totalCost = customer.ShoppingCart.GetTotalCost(currentCurrency, exchangeRate); 
             double discountAmount = totalCost * (customer.Discount / 100);
 
             if (discountAmount > 0)
@@ -112,7 +121,7 @@ namespace lab2.Shopping
                 Console.WriteLine($"Din medlemsnivå ger dig en rabatt på {customer.Discount}%. \n");
             }
 
-            Console.WriteLine($"Total kostnadt: {totalCost} kr\nTryck på valfri tangent för att betala.");
+            Console.WriteLine($"Total kostnad: {totalCost:F2}:- \nTryck på valfri tangent för att betala.");
             Console.ReadKey();
 
             customer.ShoppingCart.ClearCart();
@@ -120,14 +129,17 @@ namespace lab2.Shopping
             Console.ReadKey();
             LoggedinMenu(customer);
         }
+
+
         public void LogOut(Customer customer)
         {
             Console.Clear();
-
             Customer.LoggedIn = false;
             Console.WriteLine("Du är utloggad");
             Console.ReadLine();
+            System.Environment.Exit(0);
         }
+
 
         public void LoggedinMenu(Customer customer)
         {

@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//Skapa nya kunder
+//Hårdkoda 3 kunder som har olika medlemsnivå
+
 using lab2.Shopping;
 using lab2.Customers.Memberships;
 
@@ -63,6 +64,7 @@ namespace lab2.Customers
         return customerList;
     }
     }
+
 
     public class CustomerClass
     {

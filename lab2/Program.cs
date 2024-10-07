@@ -1,8 +1,4 @@
-﻿//Del 12: VG uppgifterna:
-//Medlemssystem med rabatt-CHECK
-// Valuta kurser
-//Spara nya kunder
-//Kolla så inga fel finns
+﻿//Kolla så inga fel finns
 //Städa upp koden så den blir CLEAN/DRY
 //Frivilligt om tid funns: styling med färg 
 using System;
@@ -19,11 +15,8 @@ namespace lab2
         static void Main(string[] args)
         {
             List<Product> products = ProductList.Products;
-
-            shoppingMethods = new ShoppingMethods(null, products);
-            accountMethods = new AccountMethods(shoppingMethods, CustomerClass.Customers);
-
             shoppingMethods = new ShoppingMethods(accountMethods, products);
+            accountMethods = new AccountMethods(shoppingMethods, CustomerClass.Customers);
 
             Menu();
         }
@@ -44,6 +37,7 @@ namespace lab2
                     Login();
                     break;
                 case "3":
+                    System.Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Ogiltigt val. Försök igen.");
