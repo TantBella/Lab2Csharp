@@ -84,4 +84,5 @@ Bronze: 5% rabatt på hela köpet
 Nivåerna skall implementeras med hjälp av arv av basklassen Kund.
 Programmet ska också spara alla registrerade kunder så att de går att använda emellan körningar.
 (OBS! Kundvagnar behöver ej sparas) Tips: textfil.
+
 Man ska också kunna välja att se priser i minst 3 olika valutor (två ytterligare förutom SEK).
