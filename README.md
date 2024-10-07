@@ -1,4 +1,4 @@
-# Lab2Csharp
+# Lab2 – Skapa en simpel butik
 
 Skapa en konsollaplikation som skall agera som en enkel affär. När programmet körs så ska man få se
 någon form av meny där man ska kunna välja att registrera ny kund eller logga in. Därefter ska
@@ -8,6 +8,7 @@ Om man väljer att handla ska man få upp minst 3 olika produkter att köpa (t.e
 Kundvagnen ska visa alla produkter man lagt i den, styckpriset, antalet och totalpriset samt totala
 kostnaden för hela kundvagnen. Kundvagnen skall sparas i kund och finnas tillgänglig när man loggar
 in.
+
 När man ska Registrera en ny kund ska man ange Namn och lösenord. Dessa ska sparas och namnet
 ska inte gå att ändra.
 Väljer man Logga In så ska man skriva in namn och lösenord. Om användaren inte finns registrerad
@@ -19,43 +20,53 @@ räkna ut totalpris och verifiera lösenord.
 I klassen Kund skall det finnas en ToString() som skriver ut Namn, lösenord och kundvagnen på ett
 snyggt sätt.
 
-OBS! Extra uppgift som krävs för VG!
+### Exempel:
+public class Customer
+{
+public string Name { get; private set; }
+private string Password { get; private set }
+private List<Product> _cart;
+public List<Product> Cart { get { return _cart; } }
+public Customer(string name, string password)
+{
+Name = name;
+Password = password;
+_cart = new List<Product>();
+}
+}
+
+## Betygskriterier
+### För godkänt:
+Koden ska fungera enligt ovan beskrivning.
+Man ska kunna få ut korrekt totalpris och antal i kundvagnen.
+ToString() ska vara implementerad.
+Programmet skall fungera utan krasch.
+Det skall gå att skapa ny kund, lägga till föremål i kundvagnen, titta i sin kundvagn och sedan fortsätta
+handla.
+
+Log in ska fungera för minst 3 fördefinierade kunder.
+Kund1: Namn="Knatte", Password="123"
+Kund2: Namn="Fnatte", Password="321"
+Kund3: Namn="Tjatte", Password="213"
+Det skall gå att logga ut och in men inget krav på att skapade kunder skall finnas kvar emellan
+körningar.
+
+### För väl godkänt krävs även:
+Koden ska vara väl strukturerad och lätt att förstå
+Lösningen ska inte innehålla massa onödig kod.
+Det ska vara skalbart och enkelt att utöka.
+Lösningen måste lämnas in i tid!
+
+Man ska även implementera extrauppgiften enligt nedan.
+## OBS! Extra uppgift som krävs för VG!
 Som Extra uppgift ska man på något sätt implementera 3 nivåer av kund (Gold, Silver och Bronze),
 dessa ska ha olika mycket rabatt.
+
 Gold: 15% rabatt på hela köpet
 Silver: 10% rabatt på hela köpet
 Bronze: 5% rabatt på hela köpet
+
 Nivåerna skall implementeras med hjälp av arv av basklassen Kund.
 Programmet ska också spara alla registrerade kunder så att de går att använda emellan körningar.
 (OBS! Kundvagnar behöver ej sparas) Tips: textfil.
 Man ska också kunna välja att se priser i minst 3 olika valutor (två ytterligare förutom SEK).
-
-#Uppgiften bruten till mindre uppgifter: 
-// Del 1: Skapa en huvudmeny där man kan registrera ny kund och logga in -switch? cHHECK
-
-//Del 2: Skapa en kund klass med properties namn (kan inte ändras), lösen, Kundvagn 
-//(en lista av produkter) CHECK
-
-//Del 3: Skapa en produkt klass med produktnamn, pris perstyck, antal i kundvagn CHECK
-
-//Del 4: REgistera ny kund ska vara ett menyval, begär användarnan och lösen och 
-//lägg sen användaren i en kundlista, kontorllera att kundnamnet är unikt
-
-//Del 5: Logga in, be om namn och lösen, kontorllera om allt finns och sätmmer,
-//om fel lösen ges visa felmeddleande och försök igen
-
-//Del 6: När man loggat in så ska en ny meny visas med följande val: handla, visa
-//kundvagn, gå till kassan
-
-//Del 7: Handla, visa minst 3 produkter, låt användaren välja proukter, gör en
-//metod som lägger till produkter ochupdaterar antal om samma produkt redan finns
-
-//DEl 8: Visa kundvagn. Skapa en funktion som visar alla produkter i kundvagen,
-//styckpris, antal, totalpris, total kostand för allt
-
-//Del 9: Gå till kassan, visa en sammanfattning av kundvagn och totalpriset för allt,
-//töm kundvagn efter betalning
-
-//Del 10: skapa en ToString() metod i kund klassen som skriver ut namn, lösen,
-//innehållet i kundvagn på snyggt sätt,
-//med namn, pris och total kostnad
