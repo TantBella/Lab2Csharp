@@ -98,8 +98,8 @@ namespace lab2
                         if (customer.Member is "Platina" or "Guld" or "Silver" or "Brons")
                         {
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.WriteLine("Välkommen: " + customer.Name + "             \nDu är på medlemsskapsnivån: " + customer.Member);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Välkommen: " + customer.Name + "     \nDu är på medlemsskapsnivån: " + customer.Member + " ");
                             Console.ResetColor();
                         }
                         else
