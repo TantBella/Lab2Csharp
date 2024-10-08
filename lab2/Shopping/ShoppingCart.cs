@@ -49,7 +49,6 @@ namespace lab2.Shopping
             }
             else
             {
-                // För att hålla reda på den sammanlagda kostnaden
                 double totalCost = 0;
 
                 Console.WriteLine("--------------------------------------------------");

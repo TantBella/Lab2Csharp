@@ -113,7 +113,7 @@ namespace lab2.Shopping
                 Console.WriteLine($"{product.Quantity,-5} stycken {product.Name}");
             }
 
-            double totalCost = customer.ShoppingCart.GetTotalCost(currentCurrency, exchangeRate); 
+            double totalCost = customer.ShoppingCart.GetTotalCost(currentCurrency, exchangeRate);
             double discountAmount = totalCost * (customer.Discount / 100);
 
             if (discountAmount > 0)

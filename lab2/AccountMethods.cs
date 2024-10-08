@@ -8,7 +8,7 @@ namespace lab2
 {
     public class AccountMethods
     {
-        private readonly string userFile = @"C:\Users\User\OneDrive\Skrivbord\ITHS 24-26\C#\lab2\Lab2Csharp\lab2\CustomerList.txt";
+        private readonly string userFile = @"C:\Users\User\OneDrive\Skrivbord\ITHS 24-26\C#\Labb2\Lab2Csharp\lab2\CustomerList.txt";
         private readonly string filePath;
         private readonly Dictionary<string, Customer> _customers;
         private readonly ShoppingMethods _shoppingMethods;
@@ -95,11 +95,11 @@ namespace lab2
                         Customer.LoggedIn = true;
                         Customer.ActiveCustomer = customer;
                         Console.Clear();
-                        if (customer.Member is "Guld" or "Silver" or "Brons")
+                        if (customer.Member is "Platina" or "Guld" or "Silver" or "Brons")
                         {
-                            Console.BackgroundColor = ConsoleColor.DarkBlue;
-                            Console.ForegroundColor = ConsoleColor.Gray;
-                            Console.WriteLine("Välkommen: " + customer.Name + "\nDu är på medlemsskapsnivån: " + customer.Member);
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.WriteLine("Välkommen: " + customer.Name + "             \nDu är på medlemsskapsnivån: " + customer.Member);
                             Console.ResetColor();
                         }
                         else

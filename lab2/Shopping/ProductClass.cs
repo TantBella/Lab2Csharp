@@ -29,9 +29,11 @@ namespace lab2.Shopping
         {
             new() { Name = "Laptop", SekPricePerUnit = 12000, PricePerUnit = 12000 },
             new() { Name = "Skärm", SekPricePerUnit = 5000, PricePerUnit = 5000 },
-            new() { Name = "Datormus", SekPricePerUnit = 399, PricePerUnit = 399},
-            new() { Name = "Tangentbord", SekPricePerUnit = 650, PricePerUnit = 650 }
-
+            new() { Name = "Datormus", SekPricePerUnit = 399, PricePerUnit = 399},           
+            new() { Name = "Tangentbord", SekPricePerUnit = 650, PricePerUnit = 650 },
+            new() { Name = "Gamingstol", SekPricePerUnit = 3990, PricePerUnit = 3990},
+            new() { Name = "Hörlurar", SekPricePerUnit = 449, PricePerUnit = 449},
+            new() { Name = "Mikrofon", SekPricePerUnit = 350, PricePerUnit = 350}
         };
         public static void UpdatePrices(double exchangeRate)
         {

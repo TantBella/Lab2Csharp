@@ -11,8 +11,12 @@ namespace lab2.Customers
         public static bool LoggedIn { get; set; }
         //Active customer ska kunna vara null
         public static Customer? ActiveCustomer { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
+        private string name;
+        public string Name
+        {
+            get { return name; }
+        }
+        public string Password { get; private set; }
         public ShoppingCart ShoppingCart { get; set; }
         //Ingen medlemsnivå som standard
         public virtual string Member { get; set; } = "Ej medlem";
@@ -20,7 +24,7 @@ namespace lab2.Customers
 
         public Customer(string name, string password)
         {
-            Name = name;
+            this.name = name;
             Password = password;
             ShoppingCart = new ShoppingCart();
         }
@@ -70,6 +74,7 @@ namespace lab2.Customers
     {
         public static Dictionary<string, Customer> Customers { get; set; } = new Dictionary<string, Customer>
         {
+               { "David", new PlatinumMember("David", "MVG") },
             { "Knatte", new BronzeMember("Knatte", "123") },
             { "Fnatte", new SilverMember("Fnatte", "321") },
             { "Tjatte", new GoldMember("Tjatte", "213") }
