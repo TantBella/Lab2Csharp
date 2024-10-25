@@ -8,7 +8,8 @@ namespace lab2
 {
     public class AccountMethods
     {
-        private readonly string userFile = @"C:\Users\User\OneDrive\Skrivbord\ITHS 24-26\C#\Labb2\Lab2Csharp\lab2\CustomerList.txt";
+        //private readonly string userFile = @"C:\Users\User\OneDrive\Skrivbord\ITHS 24-26\C#\Labb2\Lab2Csharp\lab2\CustomerList.txt";
+        private readonly string userFile = "CustomerList.txt";
         private readonly string filePath;
         private readonly Dictionary<string, Customer> _customers;
         private readonly ShoppingMethods _shoppingMethods;
