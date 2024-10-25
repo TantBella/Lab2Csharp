@@ -20,15 +20,21 @@ namespace lab2
             _shoppingMethods = shoppingMethods;
 
             filePath = Path.Combine(Environment.CurrentDirectory, userFile);
+
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath).Close();
+            }
+
             var registeredCustomers = Customer.FetchNewCustomer(filePath);
 
             foreach (var customer in registeredCustomers)
             {
                 _customers.Add(customer.Key, customer.Value);
             }
-        }
-    
-        public void Register()
+        }      
+
+    public void Register()
         {
             Console.Clear();
             Console.WriteLine("Registrera nytt konto");
